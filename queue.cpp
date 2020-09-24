@@ -76,7 +76,7 @@ void Queue::delete_el()
 
 void Queue::clear()
 {
-	node* t, *t2;
+	node* t, * t2;
 	t = beg;
 	t2 = beg;
 	while (t2 != NULL)

@@ -11,7 +11,7 @@ class Stack
 		node* next;
 	};
 private:
-	node *begin;
+	node* begin;
 public:
 	Stack();
 	int next();

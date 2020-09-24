@@ -10,7 +10,7 @@ Stack::Stack()
 
 void Stack::create()
 {
-	node *t;
+	node* t;
 	t = begin;
 	int x;
 	cin >> x;
