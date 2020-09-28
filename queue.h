@@ -12,8 +12,10 @@ class Queue {
 	};
 private:
 	node* beg, * end;
+	int count;
 public:
 	Queue();
+	int getCount();
 	void create();
 	void show();
 	void add(int);

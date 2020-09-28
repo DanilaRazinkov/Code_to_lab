@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <clocale>
+#include <fstream>
 #include "queue.h"
 #include "stack.h"
 
@@ -7,58 +8,53 @@ using namespace std;
 
 int main()
 {
-	setlocale(LC_ALL, "RUS");
-	char exit;
-	do
-	{
+    setlocale(LC_ALL, "RUS");
+    char exit;
+    do
+    {
 
-		Queue stack;
+        ifstream input("input.txt");
+        if (!input.is_open())
+        {
+            cout << "Файл не существует.";
+            return -1;
+        }
 
-		cout << "Введите последовательность : ";
-		stack.create();
+        Queue queue;
+        int t;
+        while (!input.eof())
+        {
+            input >> t;
+            queue.add(t);
+        }
 
-		cout << "Последовательность : ";
-		stack.show();
-		cout << endl;
-		char mot;
-		do
-		{
-			cout << "Выберите действие : 1 - добавить элемент, 2 - удалить элемент, 3 - перейти к следущему " <<
-				" e - выход" << endl;
-			cin >> mot;
-			switch (mot)
-			{
-			case '1':
-			{
-				cout << "Введите значение элемента : ";
-				int x;
-				cin >> x;
-				stack.add(x);
-			}
-			break;
-			case '2':
-			{
-				stack.delete_el();
-			}
-			break;
-			case '3':
-			{
-				int x = stack.next();
-				cout << "Элемент, с начала последовательности : " << x << endl;
-			}
-			break;
-			}
+        cout << "Последовательность : ";
+        queue.show();
+        cout << endl;
 
-			cout << "Новая последовательность : ";
-			stack.show();
-			cout << endl;
-		} while (mot != 'e');
-		stack.clear();
+        int x, y;
+        cout << "Введите значения, которые необходимо заменить : ";
+        cin >> x;
+
+        cout << "Введите значения, на которые необходимо заменить : ";
+        cin >> y;
 
 
-		cout << endl;
-		cout << "Введите e для выхода : ";
-		cin >> exit;
-	} while (exit != 'e');
-	return 0;
+        int count = queue.getCount();
+        for (int i = 0; i < count; i++)
+        {
+            int q = queue.next();
+            if (q == x) queue.add(y);
+            else queue.add(q);
+        }
+
+        cout << "Новая последовательность : ";
+        queue.show();
+        queue.clear();
+        input.close();
+        cout << endl;
+        cout << "Введите e для выхода : ";
+        cin >> exit;
+    } while (exit != 'e');
+    return 0;
 }

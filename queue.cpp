@@ -5,6 +5,7 @@ Queue::Queue()
 {
 	beg = NULL;
 	end = NULL;
+	count = 0;
 }
 
 void Queue::create()
@@ -20,6 +21,7 @@ void Queue::create()
 		t->next = NULL;
 		beg = t;
 		end = t;
+		count++;
 		cin >> x;
 		while (x != 0)
 		{
@@ -28,6 +30,7 @@ void Queue::create()
 			t->next = NULL;
 			end->next = t;
 			end = t;
+			count++;
 			cin >> x;
 		}
 	}
@@ -49,13 +52,22 @@ void Queue::show()
 	}
 }
 
+int Queue::getCount()
+{
+	return count;
+}
+
 void Queue::add(int x)
 {
 	node* t = new(node);
 	t->value = x;
+	if (beg == NULL)
+		beg = t;
 	t->next = NULL;
-	end->next = t;
+	if (end != NULL)
+		end->next = t;
 	end = t;
+	count++;
 }
 
 int Queue::next()
@@ -64,6 +76,7 @@ int Queue::next()
 	beg = beg->next;
 	int x = t->value;
 	delete t;
+	count--;
 	return x;
 }
 
@@ -71,6 +84,7 @@ void Queue::delete_el()
 {
 	node* t = beg;
 	beg = beg->next;
+	count--;
 	delete t;
 }
 
